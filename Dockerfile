@@ -10,6 +10,5 @@ RUN echo $TZ > /etc/timezone && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     dpkg-reconfigure -f noninteractive tzdata
 RUN ntpq -p
-RUN cd /opt && wget https://github.com/PlasmNetwork/Plasm/releases/download/v1.9.0-dusty/plasm-1.9.0-ubuntu-x86_64.tar.gz && \
-               tar -xf plasm-1.8.0-ubuntu-x86_64.tar.gz
-CMD /opt/plasm
+RUN sh -c "$(curl -sSfL https://release.solana.com/v1.6.4/install)" && export PATH="/root/.local/share/solana/install/active_release/bin:/root/.local/share/solana/install/active_release/bin"
+CMD /root
