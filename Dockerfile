@@ -10,5 +10,9 @@ RUN echo $TZ > /etc/timezone && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     dpkg-reconfigure -f noninteractive tzdata
 RUN ntpq -p
-RUN cd /root && git clone https://github.com/solana-labs/solana && cd solana && export PATH=$PWD/bin:$PATH
-CMD /root/solana
+RUN apt-get install cargo -y
+RUN apt-get install screen -y
+RUN git clone https://github.com/solana-labs/solana
+RUN /solana/scripts/cargo-install-all.sh . && export PATH=$PWD/bin:$PATH && solana-install init
+RUN screen
+CMD /opt/solana
