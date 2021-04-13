@@ -3,9 +3,10 @@ services:
   solana:
     container_name: solana
     hostname: solana
-    command: solana --version
+    # command: solana --version
+    command: ls
     build: ./
     ports:
        - "443:443"
     volumes:
-       - ./root/:/root/
+       - ./solana/:/root/solana

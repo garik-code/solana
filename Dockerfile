@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-WORKDIR /opt
+WORKDIR /
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV TZ 'Europe/Moscow'
 RUN apt-get update -y && \
@@ -10,5 +10,5 @@ RUN echo $TZ > /etc/timezone && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     dpkg-reconfigure -f noninteractive tzdata
 RUN ntpq -p
-RUN sh -c "$(curl -sSfL https://release.solana.com/v1.6.4/install)" && export PATH="/root/.local/share/solana/install/active_release/bin:/root/.local/share/solana/install/active_release/bin"
-CMD /root
+RUN cd /root && git clone https://github.com/solana-labs/solana && cd solana && export PATH=$PWD/bin:$PATH
+CMD /root/solana
